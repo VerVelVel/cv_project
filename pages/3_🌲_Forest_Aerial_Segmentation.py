@@ -7,13 +7,21 @@ from io import BytesIO
 from pathlib import Path
 import sys
 import cv2
+# Определение пути к корневой директории проекта
 project_root = Path(__file__).resolve().parents[1]
-sys.path.append(str(project_root))
 
-from models.model3.model_unet import load_custom_unet_model
+# Добавление пути к модели в sys.path
+model_path = project_root / 'models' / 'model3'
+sys.path.append(str(model_path))
 
-model_path = 'my_unet_model.h5'
-model = load_custom_unet_model(model_path)
+# Импорт модуля model_unet.py из пути
+from model_unet import load_custom_unet_model
+
+# Путь к файлу модели
+model_file_path = project_root / 'models' / 'model3' / 'my_unet_model.h5'
+
+# Загрузка модели
+model = load_custom_unet_model(str(model_file_path))
 
 def load_and_prepare_image(image, target_size=(128, 128)):
     """ Загружает и подготавливает изображение для модели. """
@@ -32,12 +40,6 @@ def predict(image):
     processed_image = load_and_prepare_image(image)
     prediction = model.predict(processed_image)
     return prediction[0]
-
-# def display_prediction(prediction):
-#     prediction = prediction.squeeze()  # Удаление лишних размерностей
-#     mask = (prediction > 0.5).astype(np.uint8)  # Применение порога для создания бинарной маски
-#     prediction_image = (mask * 255).astype(np.uint8)  # Масштабирование для отображения
-#     return Image.fromarray(prediction_image)
 
 def display_prediction(image, prediction):
     prediction = prediction.squeeze()
