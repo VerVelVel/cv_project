@@ -6,8 +6,12 @@ import requests
 from PIL import Image
 from io import BytesIO
 
+from models.model3.model_unet import load_pretrained_model
+
+model_path = 'my_unet_model.h5'  
+model = load_pretrained_model(model_path)
 # Загрузка модели
-model = load_model('my_unet_model.h5')
+# model = load_model('my_unet_model.h5')
 
 def load_and_prepare_image(image, target_size=(256, 256)):
     if image.mode != 'RGB':
