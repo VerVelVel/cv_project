@@ -32,7 +32,7 @@ st.image(str(project_root / 'images/cf_1.png'))
 # Информация о второй модели
 st.write("# Brain tumor object detection INFO:")
 st.write("Использовалась модель -YOLOv5")
-st.write("Модель обучалась на задачу бинрной детекции")
+st.write("Модель обучалась на задачу бинарной детекции")
 st.write("Размер тренировочного датасета:")
 st.write("Для разреза Axial - 310 картинок и txt-файлов к ним")
 st.write("Для разреза Coronal - 319 картинок и txt-файлов к ним")
@@ -61,3 +61,16 @@ st.image(str(project_root / 'images/PR_2-3.png'))
 # st.write("Значения метрики f1 на последней эпохе: 0.915-train и 0.849-valid")
 st.write('Confusion matrix')
 st.image(str(project_root / 'images/cf_2-3.png'))
+
+# Информация о третьей модели
+
+st.write("# Forest Aerial Images for Segmentation INFO:")
+st.write("Использовалась модель - Unet")
+st.write("Модель обучалась на задачу бинарной сегментации")
+st.write("Размер тренировочного датасета:")
+st.write("5108 картинок и масок к ним")
+
+st.write("## Forest - Unet")
+st.write("Время обучения модели - 30 эпох")
+st.image(str(project_root / 'images/unet_loss.png'))
+st.image(str(project_root / 'images/unet_acc.png'))
