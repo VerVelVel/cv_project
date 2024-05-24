@@ -9,16 +9,29 @@ from io import BytesIO
 import time
 import cv2
 import numpy as np
+import tensorflow as tf
+import cv2
+import os
+import random
+import numpy as np
+import glob
+
+from skimage.io import imread, imshow
+from skimage.transform import resize
+import matplotlib.pyplot as plt
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, Dropout, Lambda
+from tensorflow.keras.models import Model
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
 
 project_root = Path(__file__).resolve().parents[1]
 sys.path.append(str(project_root))
 
-weights = {
-    'Axial': 'models/model2/besaxial_40epoch.pt',
-    'Coronal': 'models/model2/best_brain_coronal_50+50.pt',
-    'Sagittal': 'models/model2/best_brain_sagittal_70_epoch_yolov5l.pt'
-}
 
+from models.model3.model  import load_pretrained_model
+
+model_path = 'my_unet_model.h5'  
+model = load_pretrained_model(model_path)
 
 @st.cache_resource
 def load_all_models():
